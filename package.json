@@ -1,0 +1,19 @@
+{
+  "name": "vibey-serverless-diff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "deep-object-diff": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "ts-node": "^8.2.0",
+    "typescript": "^3.5.1"
+  }
+}
