@@ -22,15 +22,17 @@ async function main(previous: IState | any, preferences: any) {
 }
 
 function addMeta(fullDiff): any {
+  const { cat = {}, labels = {}, artists = {} } = fullDiff
   return {
     ...fullDiff,
     meta: {
-      releases: Object.keys(fullDiff.cat).length,
-      labels: Object.keys(fullDiff.labels).length,
-      artists: Object.keys(fullDiff.artists).length
+      releases: Object.keys(cat).length,
+      labels: Object.keys(labels).length,
+      artists: Object.keys(artists).length
     }
   }
 }
+
 async function readFiles(fileOne: number, fileTwo: number): Promise<[any, any]> {
   const filename = date => `/home/fred/Repos/1Projects/vibey/_data/${date}.json`
   return await Promise.all([
