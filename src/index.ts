@@ -2,23 +2,30 @@ import { readFile } from 'fs'
 import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-object-diff'
 import { IState } from './interfaces'
 
-const current = 1563892045400
+const current = 1564329201526
 
-main(1563877395367, {
-  labels: ['Mechatronica', 'Church', 'Craigie Knowes', 'Lunar Orbiter Program'],
-  artists: ['No Moon', 'Barker', 'Illektrolab']
+main(1564326487893, {
+  labels: ['Mechatronica', 'Church', 'Craigie Knowes', 'Lunar Orbiter Program', 'Cultivated Electronics', 'Exit Records', 'Gosu'],
+  artists: ['No Moon', 'Barker', 'Illektrolab', '214', 'Aphex Twin', 'Dawl', 'Burial', 'Dj Bogdan', 'Donato Dozzy', 'Earth Trax']
 })
 
 async function main(previous: IState | any, preferences: any) {
   const [one, two] = await readFiles(previous, current)
 
-  const added = addMeta(addedDiff(one, two))
-  const removed = addMeta(deletedDiff(one, two))
-  const updated = addMeta(updatedDiff(one ,two))
+  const { artists, labels, meta, cat } = addMeta(addedDiff({}, two))
+
+  const result = { artists: {}, labels: {}, cat: {} }
+  preferences.labels.forEach(label => {
+    result.labels[label] = labels[label] || null
+    labels[label] && Object.keys(labels[label]).forEach(CAT => result.cat[CAT] = cat[CAT])
+  })
+  preferences.artists.forEach(artist => {
+    result.artists[artist] = artists[artist] || null
+    artists[artist] && Object.keys(artists[artist]).forEach(CAT => result.cat[CAT] = cat[CAT])
+  })
 
 
-
-  console.log(added)
+  console.log(JSON.stringify(result))
 }
 
 function addMeta(fullDiff): any {
