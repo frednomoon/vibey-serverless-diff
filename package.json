@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "deep-object-diff": "^1.1.0"
+    "deep-object-diff": "^1.1.0",
+    "googleapis": "^42.0.0"
   },
   "devDependencies": {
     "@types/node": "^12.6.8",
