@@ -4,23 +4,24 @@ import { IState } from './interfaces'
 import { Sheets } from './helpers/sheets';
 import * as memoize from 'memoize-one'
 
-exports.handler = async function (event, context, callback) {
-  try {
-    const result = await main(1565787820807, {
+
+exports.handler = function (event, context, callback) {
+  if (process.env.context !== 'production') {
+    process.env = (require('../.env.js')).default
+  }
+  main(1565787820807, {
       labels: ['Music From Memory', 'Mechatronica', 'Church', 'Craigie Knowes', 'Lunar Orbiter Program', 'Cultivated Electronics', 'Exit Records', 'Gosu'],
       artists: ['No Moon', 'Barker', 'Illektrolab', '214', 'Aphex Twin', 'Dawl', 'Burial', 'Dj Bogdan', 'Donato Dozzy', 'Earth Trax']
-    })
+  }).then(result => {
     callback(null, {
       statusCode: 200,
       body: JSON.stringify(result)
     })
-  } catch (e) {
-    callback(null, {
-      statusCode: 500,
-      body: JSON.stringify(e)
+  }).catch(e => {
+    console.log('yolo88')
+    callback(null, e)
     })
   }
-}
 
 export async function main(previous: IState | any, preferences: any) {
   // Get diff of two states
