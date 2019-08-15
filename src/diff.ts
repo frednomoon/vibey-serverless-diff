@@ -5,9 +5,9 @@ import * as memoize from 'memoize-one'
 
 
 exports.handler = function (event, context, callback) {
-  if (process.env.context !== 'production') {
-    process.env = (require('../.env.js')).default
-  }
+  // if (process.env.context !== 'production') {
+  //   process.env = (require('../.env.js')).default
+  // }
   main(1565787820807, {
     labels: ['Music From Memory', 'Mechatronica', 'Church', 'Craigie Knowes', 'Lunar Orbiter Program', 'Cultivated Electronics', 'Exit Records', 'Gosu'],
     artists: ['No Moon', 'Barker', 'Illektrolab', '214', 'Aphex Twin', 'Dawl', 'Burial', 'Dj Bogdan', 'Donato Dozzy', 'Earth Trax']
