@@ -2,21 +2,19 @@ export interface IState {
   meta: {
     labels: number,
     artists: number,
-    releases: number,
-    duplicates: number,
-    mismatches: number
+    releases: number
   }
   cat: {
-    [ CATALOGUE_NUMBER: string ]: {
+    [CATALOGUE_NUMBER: string]: {
       juno: IInfo,
       redeye: IInfo
     }
   },
   labels: {
-    [ LABEL_ID: string ]: string[]
+    [LABEL_ID: string]: string[]
   },
   artists: {
-    [ ARTIST_ID: string ]: string[]
+    [ARTIST_ID: string]: string[]
   }
 }
 

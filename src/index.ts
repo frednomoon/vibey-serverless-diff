@@ -3,10 +3,8 @@ import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-ob
 import { IState } from './interfaces'
 import { Sheets } from './helpers/sheets';
 
-// const current = 1565689635569
-
-main(1565645282551, {
-  labels: ['Mechatronica', 'Church', 'Craigie Knowes', 'Lunar Orbiter Program', 'Cultivated Electronics', 'Exit Records', 'Gosu'],
+main(1565787820807, {
+  labels: ['Music From Memory', 'Mechatronica', 'Church', 'Craigie Knowes', 'Lunar Orbiter Program', 'Cultivated Electronics', 'Exit Records', 'Gosu'],
   artists: ['No Moon', 'Barker', 'Illektrolab', '214', 'Aphex Twin', 'Dawl', 'Burial', 'Dj Bogdan', 'Donato Dozzy', 'Earth Trax']
 })
 
@@ -19,17 +17,24 @@ async function main(previous: IState | any, preferences: any) {
   const current = values[0][1]
 
   // console.log(ting)
-
-  const [one, two] = await readFiles(previous, current)
+  const one = await sheets.readToState(process.env.spreadsheetId, previous)
+  const two = await sheets.readToState(process.env.spreadsheetId, current)
 
   const { artists, labels, meta, cat } = addMeta(addedDiff(one, two))
 
+  const updater = updatedDiff(one, two)
+
+  console.log(updater)
+
   const result = { artists: {}, labels: {}, cat: {} }
+
   preferences.labels.forEach(label => {
+    label = label.toUpperCase()
     result.labels[label] = labels[label] || null
     labels[label] && Object.keys(labels[label]).forEach(CAT => result.cat[CAT] = cat[CAT])
   })
   preferences.artists.forEach(artist => {
+    artist = artist.toUpperCase()
     result.artists[artist] = artists[artist] || null
     artists[artist] && Object.keys(artists[artist]).forEach(CAT => result.cat[CAT] = cat[CAT])
   })
