@@ -17,11 +17,10 @@ export class Sheets {
       spreadsheetId,
       range
     })
-
     return response.data
   }
 
-  async readToState(spreadsheetId, range): Promise<IState> {
+  async readToState(spreadsheetId: string, range: string): Promise<IState> {
     const response = await this.sheets.spreadsheets.values.get({
       spreadsheetId, range
     })

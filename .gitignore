@@ -3,3 +3,4 @@ node_modules
 build
 token.json
 launch.json
+.env.js
