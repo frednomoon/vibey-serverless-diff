@@ -10,5 +10,8 @@
       "es2015"
     ],
     "rootDir": "src"
-  }
+  },
+  "exclude": [
+    "src/index.ts"
+  ]
 }
